@@ -27,10 +27,11 @@ namespace Cineplex.Online.Calculator.Models
         {
             validateContainer();
 
-            AmountOfCartonsThatFitInContainer = 
-                (Length / LengthCarton) *
-                (Width / WidthCarton) *
-                (Height / HeightCarton);
+            AmountOfCartonsThatFitInContainer =
+                Math.Round(
+                    (Length / LengthCarton) *
+                    (Width / WidthCarton) *
+                    (Height / HeightCarton), 0);
         }
 
         private void validateContainer()

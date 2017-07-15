@@ -19,7 +19,10 @@ namespace Cineplex.Online.Calculator.ViewModels
                 if (double.TryParse(value, out length))
                 {
                     length = double.Parse(value);
-                    OnPropertyChanged();
+					{
+						Result = "0";
+						OnPropertyChanged();
+					}
                 }
             }
         }
@@ -30,7 +33,10 @@ namespace Cineplex.Online.Calculator.ViewModels
             set
             {
                 if (double.TryParse(value, out width))
-                    OnPropertyChanged();
+				{
+					Result = "0";
+					OnPropertyChanged();
+				}
             }
         }
         double height;
@@ -40,7 +46,10 @@ namespace Cineplex.Online.Calculator.ViewModels
             set
             {
                 if (double.TryParse(value, out height))
+                {
+                    Result = "0";
                     OnPropertyChanged();
+                }
             }
         }
 
