@@ -9,11 +9,11 @@
                            IsRunning="{Binding Busy}"
                            Color="Black" />
 
-        <Entry x:Name="Length" Placeholder="Type length of container in inches" HorizontalOptions="FillAndExpand"
+        <Entry x:Name="Length" Placeholder="Type length of container in feets" HorizontalOptions="FillAndExpand"
         Keyboard="Numeric" Text="{Binding Length}" />
-        <Entry x:Name="Width" Placeholder="Type width of container in inches" HorizontalOptions="FillAndExpand"
+        <Entry x:Name="Width" Placeholder="Type width of container in feets" HorizontalOptions="FillAndExpand"
         Keyboard="Numeric" Text="{Binding Width}"/>
-        <Entry x:Name="Height" Placeholder="Type height of container in inches" HorizontalOptions="FillAndExpand"
+        <Entry x:Name="Height" Placeholder="Type height of container in feets" HorizontalOptions="FillAndExpand"
         Keyboard="Numeric" Text="{Binding Height}"/>
         <Button Text="Calculate" HorizontalOptions="FillAndExpand"
         Command="{Binding CalculateCommand}" /> 

@@ -17,9 +17,9 @@ namespace Cineplex.Online.Calculator.Models
 
         public ShippingContainerModel(double length, double width, double height)
         {
-            Length = length;
-            Width = width;
-            Height = height;
+            Length = Conversions.ConvertFeetToInches(length);
+            Width = Conversions.ConvertFeetToInches(width);
+            Height = Conversions.ConvertFeetToInches(height);
             CalculateAmountOfCartonsThatFitInContainer();
         }
 
@@ -38,11 +38,11 @@ namespace Cineplex.Online.Calculator.Models
         {
             StringBuilder errorMessage = new StringBuilder(string.Empty);
             if (Length < LengthCarton)
-                errorMessage.AppendLine($"Container's lenght needs to be equal or greater than {LengthCarton}in.");
+                errorMessage.AppendLine($"Container's lenght needs to be equal or greater than {Conversions.ConvertInchesToFeets(LengthCarton)}feets.");
 			if (Width < WidthCarton)
-                errorMessage.AppendLine($"Container's width needs to be equal or greater than {WidthCarton}in.");
+                errorMessage.AppendLine($"Container's width needs to be equal or greater than {Conversions.ConvertInchesToFeets(WidthCarton)}feets.");
 			if (Height < HeightCarton)
-                errorMessage.AppendLine($"Container's height needs to be equal or greater than {HeightCarton}in.");
+                errorMessage.AppendLine($"Container's height needs to be equal or greater than {Conversions.ConvertInchesToFeets(HeightCarton)}feets.");
 
             if (!string.IsNullOrEmpty(errorMessage.ToString()))
                 throw new Exception(errorMessage.ToString());

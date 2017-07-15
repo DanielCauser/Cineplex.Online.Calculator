@@ -44,6 +44,7 @@
     <Compile Include="ViewModels\OnlineCalculatorViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="Models\ShippingContainerModel.cs" />
+    <Compile Include="Models\Conversions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
