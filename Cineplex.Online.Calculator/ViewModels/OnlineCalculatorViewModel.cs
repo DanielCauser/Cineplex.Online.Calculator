@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Cineplex.Online.Calculator.Models;
@@ -10,46 +11,37 @@ namespace Cineplex.Online.Calculator.ViewModels
 {
     public class OnlineCalculatorViewModel : BaseViewModel
     {
-        double length;
+        string length;
         public string Length
         {
-            get { return length == 0 ? string.Empty : length.ToString(); }
+            get { return length; }
             set
             {
-                if (double.TryParse(value, out length))
-                {
-                    length = double.Parse(value);
-					{
-						Result = "0";
-						OnPropertyChanged();
-					}
-                }
+                Result = "0";
+                length = value;
+                OnPropertyChanged();
             }
         }
-        double width;
+        string width;
         public string Width
         {
-            get { return width == 0 ? string.Empty : width.ToString(); }
+            get { return width; }
             set
             {
-                if (double.TryParse(value, out width))
-				{
-					Result = "0";
-					OnPropertyChanged();
-				}
+                width = value;
+                Result = "0";
+                OnPropertyChanged();
             }
         }
-        double height;
+        string height;
         public string Height
         {
-            get { return height == 0 ? string.Empty : height.ToString(); }
+            get { return height; }
             set
             {
-                if (double.TryParse(value, out height))
-                {
-                    Result = "0";
-                    OnPropertyChanged();
-                }
+                height = value;
+                Result = "0";
+                OnPropertyChanged();
             }
         }
 
@@ -74,16 +66,35 @@ namespace Cineplex.Online.Calculator.ViewModels
                Busy = true;
                try
                {
-                   var container = new ShippingContainerModel(length, width, height);
+                   validateViewData();
+                    var container = new ShippingContainerModel(double.Parse(length)
+                                                              , double.Parse(width)
+                                                              , double.Parse(height));
                    Result = container.AmountOfCartonsThatFitInContainer.ToString();
                }
                catch (Exception ex)
                {
-                    await App.Current.MainPage.DisplayAlert("Attention!", ex.Message, "OK");
+                   await App.Current.MainPage.DisplayAlert("Attention!", ex.Message, "OK");
                }
-               
+
                Busy = false;
            });
+        }
+
+        private void validateViewData()
+        {
+			double len;
+			double wid;
+			double hei;
+            StringBuilder errorMessage = new StringBuilder(string.Empty);
+            if (!double.TryParse(length, out len))
+                errorMessage.AppendLine($"Container's length must be a number.");
+            if (!double.TryParse(width, out wid))
+                errorMessage.AppendLine($"Container's width must be a number.");
+            if (!double.TryParse(height, out hei))
+                errorMessage.AppendLine($"Container's height must be a number.");
+			if (!string.IsNullOrEmpty(errorMessage.ToString()))
+				throw new Exception(errorMessage.ToString());
         }
     }
 }
